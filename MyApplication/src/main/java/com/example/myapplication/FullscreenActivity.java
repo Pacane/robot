@@ -13,10 +13,20 @@ import android.location.LocationManager;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import android.util.Log;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -29,7 +39,7 @@ public class FullscreenActivity extends Activity {
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
      */
-    private static final boolean AUTO_HIDE = true;
+    private static final boolean AUTO_HIDE = false;
 
     /**
      * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
@@ -119,7 +129,7 @@ public class FullscreenActivity extends Activity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+        //findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
     }
 
     public void refreshGPS(View v) {
@@ -134,6 +144,7 @@ public class FullscreenActivity extends Activity {
         LocationListener mlocListener = new MyLocationListener(gpsView);
 
         gps.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, mlocListener);
+        gpsView.setText(gpsView.getText());
     }
 
     private void buildAlertMessageNoGps() {
@@ -153,6 +164,36 @@ public class FullscreenActivity extends Activity {
         final AlertDialog alert = builder.create();
         alert.show();
     }
+    private boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+    public void writeToDisk(View v) throws FileNotFoundException,IOException
+    {
+        try {
+        refreshGPS(v);
+        refreshSSIDs(v);
+
+       File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) ;
+       File file = new File(dir, "/robot1.txt");
+       BufferedWriter writer = new BufferedWriter(new FileWriter(file,true));
+       final TextView gpsView = (TextView) findViewById(R.id.gps);
+       final TextView ssidView = (TextView) findViewById(R.id.ssid);
+       writer.write (gpsView.getText().toString() +"/" + ssidView.getText().toString());
+        writer.close();
+
+        }
+        catch(Exception e)
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(e.getMessage());
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+    }
 
     public void refreshSSIDs(View v) {
         WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
@@ -162,11 +203,48 @@ public class FullscreenActivity extends Activity {
 
         String result = "";
         for(String ssid: scout.getSSIDs()){
-            result += ssid + "\n";
+            result += ssid + ";";
         }
-
+        result+= "\n";
         ssidView.setText(result);
     }
+
+    public void Droite(View v) {
+        try {
+            File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) ;
+            File file = new File(dir, "/robot1.txt");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file,true));
+            writer.write (">\n");
+            writer.close();
+
+        }
+        catch(Exception e)
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(e.getMessage());
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+    }
+
+    public void Gauche(View v) {
+        try {
+            File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) ;
+            File file = new File(dir, "/robot1.txt");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file,true));
+            writer.write ("<\n");
+            writer.close();
+
+        }
+        catch(Exception e)
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(e.getMessage());
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+    }
+
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

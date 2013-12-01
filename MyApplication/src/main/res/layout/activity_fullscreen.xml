@@ -33,34 +33,7 @@
             android:orientation="horizontal"
             tools:ignore="UselessParent">
 
-            <Button android:id="@+id/dummy_button"
-                style="?buttonBarButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/dummy_button" />
-
         </LinearLayout>
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="143dp"
-            android:inputType="textMultiLine"
-            android:ems="10"
-            android:id="@+id/ssid"
-            android:layout_gravity="left|top"
-            android:text="SSID" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="179dp"
-            android:inputType="textMultiLine"
-            android:ems="10"
-            android:id="@+id/gps"
-            android:layout_gravity="left|center_vertical"
-            android:layout_marginTop="-13dp"
-            android:text="GPS"
-            android:layout_marginBottom="-33dp" />
 
         <Button
             android:layout_width="wrap_content"
@@ -70,6 +43,43 @@
             android:onClick="refreshGPS"
             android:layout_gravity="right|center_vertical" />
 
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="179dp"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/gps"
+            android:layout_gravity="left|bottom"
+            android:layout_marginTop="-13dp"
+            android:text="GPS"
+            android:layout_marginBottom="-33dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="143dp"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/ssid"
+            android:layout_gravity="right|bottom"
+            android:text="SSID" />
+
+        <Button
+            android:layout_width="119dp"
+            android:layout_height="168dp"
+            android:text="Gauche"
+            android:id="@+id/btnGauche"
+            android:layout_gravity="left|center_vertical"
+            android:onClick="Gauche" />
+
+        <Button
+            android:layout_width="111dp"
+            android:layout_height="162dp"
+            android:text="Droite"
+            android:id="@+id/btnDroite"
+            android:layout_gravity="center"
+            android:layout_marginLeft="4dp"
+            android:onClick="Droite" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -77,6 +87,15 @@
             android:id="@+id/refreshSSIDButton"
             android:onClick="refreshSSIDs"
             android:layout_gravity="right|top" />
+
+        <Button
+            android:layout_width="254dp"
+            android:layout_height="160dp"
+            android:text="^"
+            android:id="@+id/btnAvant"
+            android:layout_gravity="left|top"
+            android:onClick="writeToDisk" />
+
     </FrameLayout>
 
 </FrameLayout>
