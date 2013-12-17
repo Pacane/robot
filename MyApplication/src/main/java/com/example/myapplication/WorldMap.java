@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Created by Joel on 16/12/13.
  */
-public class BestMatch {
+public class WorldMap {
 
     List<Feature> mapFeatures = new ArrayList<Feature>();
 
@@ -17,7 +17,7 @@ public class BestMatch {
         mapFeatures.add(feature);
     }
 
-    public Feature findBestMatch(Set<String> scannedBSSIDs){
+    public Feature findBestMatch(List<String> scannedBSSIDs){
         Map<Feature, Integer> matchScore = new HashMap<Feature, Integer>();
 
         for (Feature feature : mapFeatures){
