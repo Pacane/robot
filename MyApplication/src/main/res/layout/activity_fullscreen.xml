@@ -51,8 +51,8 @@
             android:id="@+id/gps"
             android:layout_gravity="left|bottom"
             android:layout_marginTop="-13dp"
-            android:text="GPS"
-            android:layout_marginBottom="-33dp" />
+            android:layout_marginBottom="-33dp"
+            android:singleLine="false" />
 
         <EditText
             android:layout_width="wrap_content"

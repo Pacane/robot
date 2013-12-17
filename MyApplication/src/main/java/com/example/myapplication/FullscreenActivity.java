@@ -133,7 +133,7 @@ public class FullscreenActivity extends Activity {
     }
 
     public void refreshGPS(View v) {
-        LocationManager gps = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+       /* LocationManager gps = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
         if ( !gps.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
             buildAlertMessageNoGps();
@@ -144,7 +144,7 @@ public class FullscreenActivity extends Activity {
         LocationListener mlocListener = new MyLocationListener(gpsView);
 
         gps.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, mlocListener);
-        gpsView.setText(gpsView.getText());
+        gpsView.setText(gpsView.getText());*/
     }
 
     private void buildAlertMessageNoGps() {
