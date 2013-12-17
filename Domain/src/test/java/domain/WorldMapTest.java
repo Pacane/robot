@@ -47,4 +47,30 @@ public class WorldMapTest {
 
         assertEquals(best, f1);
     }
+
+    @Test
+    public void laMeilleureFeatureEstCelleQuiMatchLePlusDeSSIDs() throws Exception {
+        worldMap.addFeature(f1);
+        worldMap.addFeature(f2);
+
+        Feature best = worldMap.findBestMatch(Arrays.asList("1", "2"));
+
+        assertEquals(best, f2);
+    }
+
+    @Test
+    public void meilleureFeatureEstCelleAvecXXXX() throws Exception {
+        worldMap.addFeature(f2);
+        worldMap.addFeature(f3);
+
+        Feature best = worldMap.findBestMatch(Arrays.asList("1", "2"));
+
+
+        /*
+            TODO: On fait quoi avec le problème mal posé?
+            Genre ici y'a 2 meilleures solutions... Devrait-on retourner une liste de résultats possibles?
+         */
+
+        assertEquals(best, f2);
+    }
 }
